@@ -1,0 +1,12 @@
+http://test.com/api/authors/ GET
+http://test.com/api/authors/1/ GET
+http://test.com/api/authors/ POST
+http://test.com/api/authors/1/ PATCH, PUT, DELETE
+
+
+
+[Client] -> [url] -> [view] -> [serializer] -> [model]
+
+[Client] <- [template] <- [view] <- [serializer] <- [model]
+            [JSON] <=      dict  <= Model
+            [JSON]  =>      dict => Model
