@@ -15,14 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from library.views import AuthorModelViewSet
+from rest_framework.routers import DefaultRouter, SimpleRouter
+from library.views import AuthorModelViewSet, author_get, author_post, BioModelViewSet, BookModelViewSet, book_get, \
+    bio_get
 
-router = DefaultRouter()
+router = SimpleRouter()
 router.register('authors', AuthorModelViewSet)
+router.register('books', BookModelViewSet)
+router.register('bios', BioModelViewSet)
 
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('author_get/', author_get),
+    path('book_get/', book_get),
+    path('bio_get/', bio_get),
+    path('author_get/<int:pk>', author_get),
+    path('author_post/', author_post),
 ]
