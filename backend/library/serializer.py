@@ -1,4 +1,4 @@
-from .models import Author, Book, Bio
+from .models import Author, Book, Bio, TestBio
 from rest_framework.serializers import ModelSerializer, Serializer, CharField, IntegerField, ValidationError, StringRelatedField
 
 
@@ -56,4 +56,10 @@ class BookModelSerializer(ModelSerializer):
 class BioModelSerializer(ModelSerializer):
     class Meta:
         model = Bio
+        fields = '__all__'
+
+
+class TestBioModelSerializer(ModelSerializer):
+    class Meta:
+        model = TestBio
         fields = '__all__'

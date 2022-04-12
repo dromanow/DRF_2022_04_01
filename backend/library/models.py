@@ -20,3 +20,8 @@ class Bio(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 
+class TestBio(models.Model):
+    title = models.CharField(max_length=64, primary_key=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+
