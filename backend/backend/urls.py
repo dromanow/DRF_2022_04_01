@@ -20,21 +20,21 @@ from library.views import *
 
 router = DefaultRouter()
 router.register('authors', AuthorModelViewSet)
-router.register('books', BookReadViewSet)
+router.register('books', BookModelViewSet)
 router.register('bios', BioModelViewSet)
 router.register('tb', TestBioModelViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
-    path('book_get/', book_get),
-    path('book_get_api_view/', BookApiView.as_view()),
-    path('book_get_viewset/', BookReadViewSet.as_view({'get': 'list'})),
-    path('book_get_dec/', book_get_dec),
-    path('book_get_conc/', BookListApiView.as_view()),
-    path('bio_get/', bio_get),
-    path('author_get/', author_get),
-    path('author_get_viewset/kwargs/<str:first_name>', AuthorModelViewSet.as_view({'get': 'list'})),
-    path('author_get/<int:pk>', author_get),
-    path('author_post/', author_post),
+    # path('book_get/', book_get),
+    # path('book_get_api_view/', BookApiView.as_view()),
+    # path('book_get_viewset/', BookReadViewSet.as_view({'get': 'list'})),
+    # path('book_get_dec/', book_get_dec),
+    # path('book_get_conc/', BookListApiView.as_view()),
+    # path('bio_get/', bio_get),
+    # path('author_get/', author_get),
+    # path('author_get_viewset/kwargs/<str:first_name>', AuthorModelViewSet.as_view({'get': 'list'})),
+    # path('author_get/<int:pk>', author_get),
+    # path('author_post/', author_post),
 ]
