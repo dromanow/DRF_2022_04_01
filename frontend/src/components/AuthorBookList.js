@@ -1,4 +1,7 @@
 import {useParams} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+
 
 const BookItem = ({book}) => {
     return (
@@ -9,9 +12,19 @@ const BookItem = ({book}) => {
     )
 }
 
-const AuthorBookList = ({books}) =>  {
+const AuthorBookList = () =>  {
+    const [books, setBooks] = useState([])
     var {id} = useParams()
-    var filteredBooks = books.filter((book) => book.authors.includes(parseInt(id)))
+
+    useEffect(() => {
+        axios
+            .get('http://127.0.0.1:8000/api/books/', { params: { author: id } })
+            .then(response => {
+                let books = response.data
+                setBooks(books)
+            })
+            .catch(error => console.log(error))
+    }, [setBooks]);
 
     return (
         <table>
@@ -21,7 +34,7 @@ const AuthorBookList = ({books}) =>  {
         <th>
             Authors
         </th>
-        {filteredBooks.map((book) => <BookItem book={book} />)}
+        {books.map((book) => <BookItem book={book} />)}
         </table>
     )
 }
