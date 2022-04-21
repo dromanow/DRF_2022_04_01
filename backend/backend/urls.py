@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter, SimpleRouter
+from rest_framework.authtoken import views
+from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from library.views import *
 
 router = DefaultRouter()
@@ -27,6 +29,11 @@ router.register('tb', TestBioModelViewSet)
 urlpatterns = [
     path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-auth-token/', views.obtain_auth_token),
+    path('jwt-token/', TokenObtainPairView.as_view()),
+    path('jwt-token-refresh/', TokenRefreshView.as_view()),
+
     # path('book_get/', book_get),
     # path('book_get_api_view/', BookApiView.as_view()),
     # path('book_get_viewset/', BookReadViewSet.as_view({'get': 'list'})),
