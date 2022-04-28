@@ -15,7 +15,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.pagination import LimitOffsetPagination
 from .models import Author, Book, Bio, TestBio
 from .serializer import AuthorModelSerializer, AuthorSerializer, BookModelSerializer, BioModelSerializer, \
-    BookSerializer, BioSerializer, TestBioModelSerializer
+    BookSerializer, BioSerializer, TestBioModelSerializer, AuthorModelSerializerV2
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser, \
     BasePermission, DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly
 
@@ -39,8 +39,16 @@ class AuthorLimitOffsetPagination(LimitOffsetPagination):
 class AuthorModelViewSet(ModelViewSet):
     # pagination_class = AuthorLimitOffsetPagination
     # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
-    serializer_class = AuthorModelSerializer
+    # serializer_class = AuthorModelSerializer
+
     queryset = Author.objects.all()
+
+    vers = {
+        '2.0': AuthorModelSerializerV2
+    }
+
+    def get_serializer_class(self):
+        return self.vers.get(self.request.version, AuthorModelSerializer)
 
     @action(detail=False, methods=['get'])
     def get_author_name(self, request, pk=None):

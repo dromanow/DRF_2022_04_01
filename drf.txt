@@ -6,6 +6,9 @@ http://test.com/api/authors/1/ PATCH, PUT, DELETE
 
 
 [Client] -> [url] -> [view] -> [serializer] -> [model]
+                               [serializerV2] -> [modelV2]
+
+
 
 [Client] <- [template] <- [view] <- [serializer] <- [model]
             [JSON] <=      dict  <= Model

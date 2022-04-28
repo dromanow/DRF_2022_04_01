@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'drf_yasg',
     'corsheaders',
     'library'
 ]
@@ -83,15 +84,34 @@ TEMPLATES = [
 # from rest_framework.permissions import IsAuthenticated
 # from rest_framework.authentication import BasicAuthentication, TokenAuthentication, SessionAuthentication
 # from rest_framework_simplejwt.authentication import JWTAuthentication
+# from rest_framework.versioning import URLPathVersioning, NamespaceVersioning, HostNameVersioning, QueryParameterVersioning, AcceptHeaderVersioning
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         # 'rest_framework.renderers.BrowsableAPIRenderer'
     ],
+
+    # http://127.0.0.1:8000/api/2.0/author/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    # http://127.0.0.1:8000/api/2.0/author/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+
+    # http://v1.test.com/api/author/
+    # http://v2.test.com/api/author/
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.HostNameVersioning',
+
+    # http://v2.test.com/api/author/?version=2.0
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
+
+    # http://v2.test.com/api/author/
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.AcceptHeaderVersioning',
+
+
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     # 'PAGE_SIZE': 2
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
@@ -99,6 +119,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
+
+SWAGGER_SETTINGS = { 'SECURITY_DEFINITIONS': { 'Basic': { 'type': 'basic' }, 'Token': { 'type': 'apiKey', 'name': 'Authorization', 'in': 'header' } } }
 
 if DEBUG:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')
