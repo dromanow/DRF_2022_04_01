@@ -19,6 +19,7 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 from rest_framework.authtoken import views
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from library.views import *
+from graphene_django.views import GraphQLView
 from drf_yasg.views import get_schema_view
 from drf_yasg.openapi import Info, Contact, License
 
@@ -57,6 +58,7 @@ urlpatterns = [
 
     # re_path(r'^api/(?P<version>\d.\d)/authors/', AuthorModelViewSet.as_view({'get': 'list'}))
 
+    path('graphql/', csrf_exempt(GraphQLView.as_view(graphiql=True)))
     # path('book_get/', book_get),
     # path('book_get_api_view/', BookApiView.as_view()),
     # path('book_get_viewset/', BookReadViewSet.as_view({'get': 'list'})),
