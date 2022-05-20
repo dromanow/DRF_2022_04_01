@@ -13,3 +13,23 @@ http://test.com/api/authors/1/ PATCH, PUT, DELETE
 [Client] <- [template] <- [view] <- [serializer] <- [model]
             [JSON] <=      dict  <= Model
             [JSON]  =>      dict => Model
+
+
+#1 { [database] <-> [backend] <-> [nginx] <-> [nginx:frontend] }
+
+#2 { [database] } <-> { [backend] <-> [nginx] }
+
+#3 { [database] } <-> { [backend1] <-> [nginx] }
+                      { [backend2] }
+                      { [backend3] }
+                      { [backend4] }
+
+#4 { [database] } <-> { [backend1] } <-> { [nginx] }
+                      { [backend2] }
+                      { [backend3] }
+                      { [backend4] }
+
+#5 { [databaseM] } <-> { [backend1] } <-> { [nginx] }
+   { [databaseS] }     { [backend2] }
+   { [databaseS] }     { [backend3] }
+   { [databaseS] }     { [backend4] }

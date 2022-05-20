@@ -3,6 +3,7 @@ import io
 from django.http import HttpResponse, HttpResponseServerError, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view, renderer_classes, action
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, ListModelMixin, \
@@ -106,6 +107,7 @@ class BookApiView(APIView):
         return Response(serializer.data)
 
 
+@swagger_auto_schema
 @api_view(['GET'])
 @renderer_classes([JSONRenderer])
 def book_get_dec(request):
@@ -132,7 +134,6 @@ def bio_get(request):
     serializer = BioSerializer(bio, many=True)
     json_data = JSONRenderer().render(serializer.data)
     return HttpResponse(json_data)
-
 
 
 @csrf_exempt
